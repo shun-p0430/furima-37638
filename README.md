@@ -1,28 +1,38 @@
 ## usersテーブル
 
-| Column             | Type   | Options                   |
-| ------------------ | ------ | ------------------------- |
-| nickname           | string | null: false               |
-| email              | string | null: false, unique: true |
-| encrypted_password | string | null: false               |
-| name               | string | null: false               |
-| ruby               | string | null: false               |
-| birthday           | date   | null: false               |
+| Column             | Type    | Options                   |
+| ------------------ | ------- | ------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name_ruby    | string  | null: false               |
+| last_name_ruby     | string  | null: false               |
+| birth_year_id      | integer | null: false               |
+| birth_month_id     | integer | null: false               |
+| birth_date_id      | integer | null: false               |
 
 ### Association
 
 - has_many :items
 - has_many :comments
 - has_many :purchases
+- has_many :destinations
 
 ## itemsテーブル
 
-| Column | Type       | Options                        |
-| ------ | ---------- | ------------------------------ |
-| name   | string     | null: false                    |
-| text   | text       | null: false                    |
-| price  | integer    | null: false                    |
-| user   | references | null: false, foreign_key: true |
+| Column             | Type       | Options                        |
+| ------------------ | ---------- | ------------------------------ |
+| name               | string     | null: false                    |
+| text               | text       | null: false                    |
+| category_id        | integer    | null: false                    |
+| status_id          | integer    | null: false                    |
+| postage_id         | integer    | null: false                    |
+| shipment_source_id | integer    | null: false                    |
+| shipping_date_id   | integer    | null: false                    |
+| price              | integer    | null: false                    |
+| user               | references | null: false, foreign_key: true |
 
 ### Association
 
@@ -47,12 +57,6 @@
 
 | Column      | Type       | Options                        |
 | ----------- | ---------- | ------------------------------ |
-| post_code   | string     | null: false                    |
-| prefectures | string     | null: false                    |
-| cities      | string     | null: false                    |
-| address     | string     | null: false                    |
-| apartment   | string     | null: false                    |
-| tel         | integer    | null: false                    |
 | user        | references | null: false, foreign_key: true |
 | item        | references | null: false, foreign_key: true |
 
@@ -60,3 +64,22 @@
 
 - belongs_to :user
 - belongs_to :item
+- has_one :destination
+
+## destinationsテーブル
+
+| Column         | Type       | Options                        |
+| -------------- | ---------- | ------------------------------ |
+| post_code      | string     | null: false                    |
+| prefecture_id  | integer    | null: false                    |
+| city           | string     | null: false                    |
+| address        | string     | null: false                    |
+| apartment      | string     |                                |
+| tel            | string     | null: false                    |
+| user           | references | null: false, foreign_key: true |
+| purchase       | references | null: false, foreign_key: true |
+
+### Association
+
+- belongs_to :user
+- belongs_to :purchase
