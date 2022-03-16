@@ -9,16 +9,13 @@
 | last_name          | string  | null: false               |
 | first_name_ruby    | string  | null: false               |
 | last_name_ruby     | string  | null: false               |
-| birth_year_id      | integer | null: false               |
-| birth_month_id     | integer | null: false               |
-| birth_date_id      | integer | null: false               |
+| birthday           | date    | null: false               |
 
 ### Association
 
 - has_many :items
 - has_many :comments
 - has_many :purchases
-- has_many :destinations
 
 ## itemsテーブル
 
@@ -29,7 +26,7 @@
 | category_id        | integer    | null: false                    |
 | status_id          | integer    | null: false                    |
 | postage_id         | integer    | null: false                    |
-| shipment_source_id | integer    | null: false                    |
+| prefecture_id      | integer    | null: false                    |
 | shipping_date_id   | integer    | null: false                    |
 | price              | integer    | null: false                    |
 | user               | references | null: false, foreign_key: true |
@@ -76,10 +73,8 @@
 | address        | string     | null: false                    |
 | apartment      | string     |                                |
 | tel            | string     | null: false                    |
-| user           | references | null: false, foreign_key: true |
 | purchase       | references | null: false, foreign_key: true |
 
 ### Association
 
-- belongs_to :user
 - belongs_to :purchase
