@@ -13,4 +13,6 @@ class User < ApplicationRecord
     validates :last_name_ruby, format: { with: /\A[ァ-ヶー]+\z/, message: 'is invalid. Input full-width katakana characters' }
     validates :birthday
   end
+
+  has_many :items
 end
