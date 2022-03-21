@@ -4,8 +4,8 @@ class Item < ApplicationRecord
     validates :text
     validates :image
     validates :price, numericality: { only_integer: true, message: 'invalid. Input half-width characters' }
-    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is out of setting range' }
   end
+  validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is out of setting range' }
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
     validates :category_id
