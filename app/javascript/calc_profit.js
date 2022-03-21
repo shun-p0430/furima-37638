@@ -4,7 +4,7 @@
   const profit = document.getElementById("profit");
   itemPrice.addEventListener("keyup",() => {
     const ATPValue = Math.floor(itemPrice.value * 0.1);
-    const PValue = itemPrice.value - ATPValue;
+    const PValue = Math.floor(itemPrice.value - ATPValue);
     addTaxPrice.innerHTML = ATPValue;
     profit.innerHTML = PValue;
   });
