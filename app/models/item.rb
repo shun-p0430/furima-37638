@@ -2,7 +2,9 @@ class Item < ApplicationRecord
   with_options presence: true do
     validates :name
     validates :text
-    validates :price, numericality: { only_integer: true, greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is out of setting range' }
+    validates :image
+    validates :price, numericality: { only_integer: true, message: 'invalid. Input half-width characters' }
+    validates :price, numericality: { greater_than_or_equal_to: 300, less_than_or_equal_to: 9999999, message: 'is out of setting range' }
   end
 
   with_options numericality: { other_than: 0, message: "can't be blank" } do
@@ -14,6 +16,7 @@ class Item < ApplicationRecord
   end
 
   belongs_to :user
+  has_one_attached :image
 
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to :category
