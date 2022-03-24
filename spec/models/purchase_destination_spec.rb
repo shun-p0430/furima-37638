@@ -19,6 +19,7 @@ RSpec.describe Destination, type: :model do
         @pd.apartment = ''
         expect(@pd).to be_valid
       end
+      
     end
     
     context '内容に問題がある場合' do
@@ -86,6 +87,12 @@ RSpec.describe Destination, type: :model do
         @pd.tel = '１２３４５６７８９０'
         @pd.valid?
         expect(@pd.errors.full_messages).to include("Tel is invalid. Input only number")
+      end
+
+      it 'tokenがなければ購入できない' do
+        @pd.token = ''
+        @pd.valid?
+        expect(@pd.errors.full_messages).to include("Token can't be blank")
       end
     end
   end

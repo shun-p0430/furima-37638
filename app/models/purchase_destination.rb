@@ -1,6 +1,6 @@
 class PurchaseDestination
   include ActiveModel::Model
-  attr_accessor :post_code, :prefecture_id, :city, :address, :apartment, :tel, :purchase_id, :user_id, :item_id
+  attr_accessor :post_code, :prefecture_id, :city, :address, :apartment, :tel, :purchase_id, :user_id, :item_id, :token, :price
 
   with_options presence: true do
     validates :post_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Enter it as follows (e.g. 123-4567)" }
@@ -10,6 +10,7 @@ class PurchaseDestination
     validates :tel, format: { with: /\A\d{10,11}\z/, message: "is too short" }
     validates :item_id
     validates :user_id
+    validates :token
   end
   validates :tel, format: { with: /\A[0-9]+\z/, message: "is invalid. Input only number"}
 
