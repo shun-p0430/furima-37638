@@ -4,7 +4,6 @@ class PurchasesController < ApplicationController
   before_action :move_to_root, only: :index
 
   def index
-    binding.pry
     @purchase_destination = PurchaseDestination.new
   end
 
@@ -22,11 +21,13 @@ class PurchasesController < ApplicationController
   private
 
   def purchase_destination_params
-    params.require(:purchase_destination).permit(:post_code, :prefecture_id, :city, :address, :apartment, :tel).merge(user_id: current_user.id, item_id: @item.id, token: params[:token], price: @item.price)
+    params.require(:purchase_destination).permit(:post_code, :prefecture_id, :city, :address, :apartment, :tel).merge(
+      user_id: current_user.id, item_id: @item.id, token: params[:token], price: @item.price
+    )
   end
 
   def pay_item
-    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp.api_key = ENV['PAYJP_SECRET_KEY']
     Payjp::Charge.create(
       amount: purchase_destination_params[:price],
       card: purchase_destination_params[:token],
@@ -39,10 +40,6 @@ class PurchasesController < ApplicationController
   end
 
   def move_to_root
-    if @item.user_id == current_user.id || Purchase.exists?(item_id: @item.id)
-      redirect_to root_path
-    end
+    redirect_to root_path if @item.user_id == current_user.id || Purchase.exists?(item_id: @item.id)
   end
-
-
 end

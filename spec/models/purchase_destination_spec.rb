@@ -19,9 +19,8 @@ RSpec.describe Destination, type: :model do
         @pd.apartment = ''
         expect(@pd).to be_valid
       end
-      
     end
-    
+
     context '内容に問題がある場合' do
       it 'user_idが空では購入できない' do
         @pd.user_id = nil
@@ -44,7 +43,7 @@ RSpec.describe Destination, type: :model do
       it 'post_codeが3桁-4桁でなければ購入できない' do
         @pd.post_code = '0000-000'
         @pd.valid?
-        expect(@pd.errors.full_messages).to include("Post code is invalid. Enter it as follows (e.g. 123-4567)")
+        expect(@pd.errors.full_messages).to include('Post code is invalid. Enter it as follows (e.g. 123-4567)')
       end
 
       it 'prefecture_idが空では購入できない' do
@@ -80,13 +79,13 @@ RSpec.describe Destination, type: :model do
       it 'telが10桁未満では購入できない' do
         @pd.tel = '123456789'
         @pd.valid?
-        expect(@pd.errors.full_messages).to include("Tel is too short")
+        expect(@pd.errors.full_messages).to include('Tel is too short')
       end
 
       it 'telが半角数字以外では購入できない' do
         @pd.tel = '１２３４５６７８９０'
         @pd.valid?
-        expect(@pd.errors.full_messages).to include("Tel is invalid. Input only number")
+        expect(@pd.errors.full_messages).to include('Tel is invalid. Input only number')
       end
 
       it 'tokenがなければ購入できない' do
