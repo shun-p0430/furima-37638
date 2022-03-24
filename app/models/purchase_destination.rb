@@ -11,7 +11,7 @@ class PurchaseDestination
     validates :item_id
     validates :user_id
   end
-  validates :tel, format: { with: /\A\d\z/, message: "is invalid. Input only number"}
+  validates :tel, format: { with: /\A[0-9]+\z/, message: "is invalid. Input only number"}
 
   def save
     purchase = Purchase.create(user_id: user_id, item_id: item_id)
