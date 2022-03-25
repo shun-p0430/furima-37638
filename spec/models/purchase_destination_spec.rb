@@ -76,8 +76,14 @@ RSpec.describe Destination, type: :model do
         expect(@pd.errors.full_messages).to include("Tel can't be blank")
       end
 
-      it 'telが10桁未満では購入できない' do
+      it 'telが9桁以下では購入できない' do
         @pd.tel = '123456789'
+        @pd.valid?
+        expect(@pd.errors.full_messages).to include('Tel is too short')
+      end
+
+      it 'telが12桁以上では購入できない' do
+        @pd.tel = '123456789012'
         @pd.valid?
         expect(@pd.errors.full_messages).to include('Tel is too short')
       end
